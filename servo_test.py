@@ -23,17 +23,21 @@ def set_angle(angle):
     GPIO.output(servo_pin, False)
     pwm.ChangeDutyCycle(0)
 
-try:
-    while True:
-        angle = 65
-        #angle = int(input("Enter angle (0 to 180): "))
-        if 0 <= angle <= 180:
-            set_angle(20)
-            set_angle(180)
-        else:
-            print("Angle must be between 0 and 180")
-except KeyboardInterrupt:
-    pass
+
+def move_head():
+    count = 0
+    try:
+        while count < 6:
+            angle = 65
+            if 0 <= angle <= 180:
+                set_angle(20)
+                set_angle(180)
+                count += 1
+                print(count)
+            else:
+                print("Angle must be between 0 and 180")
+    except KeyboardInterrupt:
+        pass
 
 pwm.stop()
 GPIO.cleanup()
