@@ -3,6 +3,7 @@ import RPi.GPIO as GPIO
 import time
 import requests
 import sqlite3
+import threading
 
 # Database path for detections
 db_file = "/home/birder/BirdNET-Pi/scripts/birds.db"
@@ -113,10 +114,25 @@ def count_detections(db_path):
             cursor.close()
             connection.close()
 
+def handle_detection():
+    servo_thread = threading.Thread(target =move_head)
+    motor_thread = threading.Thread(target =flap_wings)
+
+    servo_thread.start()
+    motor_thread.start()
+
+    servo_thread.join()
+    motor_thread.join()
 
 # ---------------------------------
 # -------- MAIN FUNCTION ----------
 # ---------------------------------
+
+def test_main():
+    while(True):
+        detect = input("detection found (y/n): ")
+        if (detect == 'y'):
+            handle_detection()
 
 def main():
     num_detections = count_detections(db_file)[0]
