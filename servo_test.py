@@ -40,4 +40,5 @@ def move_head():
         pass
 
 pwm.stop()
+pwm = None
 GPIO.cleanup()
