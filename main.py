@@ -143,6 +143,7 @@ def main():
             move_head()
             num_detections = count_detections(db_file)[0]
 
+test_main()
 
 # stop pwms
 servo_pwm.stop()
