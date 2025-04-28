@@ -15,8 +15,8 @@ GPIO.setup([IN3, ENA, IN4], GPIO.OUT)
 
 # Forward
 
-pwm = GPIO.PWM(ENA, 100)
-pwm.start(25)
+motor_pwm = GPIO.PWM(ENA, 100)
+motor_pwm.start(25)
 
 GPIO.output(IN4, GPIO.LOW)
 GPIO.output(IN3, GPIO.HIGH)
@@ -26,5 +26,5 @@ time.sleep(20)
 # Stop
 GPIO.output(IN3, GPIO.LOW)
 
-pwm.stop()
+motor_pwm.stop()
 GPIO.cleanup()
