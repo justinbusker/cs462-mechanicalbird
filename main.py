@@ -137,11 +137,11 @@ def test_main():
 def main():
     num_detections = count_detections(db_file)[0]
     while (True):
-    time.sleep(1)
-    if(count_detections(db_file)[0] > num_detections):
-        print("Bird Found!")
-        move_head()
-        num_detections = count_detections(db_file)[0]
+        time.sleep(1)
+        if(count_detections(db_file)[0] > num_detections):
+            print("Bird Found!")
+            move_head()
+            num_detections = count_detections(db_file)[0]
 
 
 # stop pwms
