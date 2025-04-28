@@ -119,12 +119,16 @@ def count_detections(db_path):
 def handle_detection():
     servo_thread = threading.Thread(target =move_head)
     motor_thread = threading.Thread(target =flap_wings)
+    sound_thread = threading.Thread(target =play_calls)
 
     servo_thread.start()
     motor_thread.start()
+    sound_thread.start()
 
+    time.sleep(5)
     servo_thread.join()
     motor_thread.join()
+    sound_thread.join()
 
 # ---------------------------------
 # -------- SPEAKER FUNCTION -------
@@ -155,11 +159,10 @@ def main():
     while (True):
         time.sleep(1)
         if(count_detections(db_file)[0] > num_detections):
-            print("Bird Found!")
-            move_head()
+            handle_detection()
             num_detections = count_detections(db_file)[0]
 
-play_calls()
+main()
 
 # stop pwms
 servo_pwm.stop()
