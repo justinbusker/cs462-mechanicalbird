@@ -4,6 +4,7 @@ import time
 import requests
 import sqlite3
 import threading
+import vlc
 
 # Database path for detections
 db_file = "/home/birder/BirdNET-Pi/scripts/birds.db"
@@ -125,6 +126,12 @@ def handle_detection():
     motor_thread.join()
 
 # ---------------------------------
+# -------- SPEAKER FUNCTION -------
+# ---------------------------------
+def play_calls():
+
+
+# ---------------------------------
 # -------- MAIN FUNCTION ----------
 # ---------------------------------
 
@@ -142,8 +149,12 @@ def main():
             print("Bird Found!")
             move_head()
             num_detections = count_detections(db_file)[0]
+p = vlc.MediaPlayer("./cooper-hawk-calls/callOne.mp3")
+p.audio_set_volume(100)
+p.play()
+time.sleep(3)
+p.stop()
 
-test_main()
 
 # stop pwms
 servo_pwm.stop()
